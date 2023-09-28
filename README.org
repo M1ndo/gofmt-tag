@@ -1,0 +1,30 @@
+#+title: Gofmt-Tag
+#+html: <p><img src="https://img.shields.io/badge/Emacs-27.1+-blueviolet.svg?style=flat-square&logo=GNU%20Emacs&logoColor=white">
+#+html: <img src="https://img.shields.io/badge/-Linux-fcc624?logo=linux&style=flat-square&logoColor=black">
+#+html: <img src="https://img.shields.io/badge/-MacOS-lightgrey?logo=apple&style=flat-square&logoColor=black">
+#+HTML: <img src="https://img.shields.io/badge/windows-sec?style=flat-square&logo=windows&logoColor=black&color=orange">
+
+An Emacs package to align Golang struct tags that uses [[https://github.com/momaek/formattag][formattag]]
+While =gofmt= exists in go-mode which is just `go fmt` is some where pretty equivalent to =formattag=,
+However i find that formattag handles tags better when dealing with json and xml.
+
+#+HTML: <img src="imgs/gofmt.gif" alt="Demo Gif">
+
+* Usage
+First let's download =formattag=.
+Either compile it yourself or download a prebuilt binary
+#+begin_src bash
+cd /tmp && wget https://github.com/momaek/formattag/releases/download/v0.0.9/formattag.tar.gz
+gunzip -d formattag.tar.gz && tar -xf formattag.tar
+sudo cp formattag-linux-amd64 /usr/local/bin/formattag
+#+end_src
+Now let's use gofmt-tag.
+In *Doom Emacs* =packages.el=
+#+begin_src emacs-lisp
+(package! gofmt-tag :recipe (:host github :repo "m1ndo/gofmt-tag"))
+#+end_src
+In *Doom Emacs / Vanilla Emacs*
+#+begin_src emacs-lisp
+(require 'gofmt-tag)
+(add-hook 'go-mode-hook #'(lambda () (gofmt-tag-mode)))
+#+end_src
