@@ -1,4 +1,4 @@
-;;; gofmttag.el --- Format and align go struct tags -*- lexical-binding: t -*-
+;;; gofmt-tag.el --- Format and align go struct tags -*- lexical-binding: t -*-
 
 ;; Written by ybenel (m1ndo) - 2023
 ;; Author: ybenel <http://github/m1ndo>
@@ -67,6 +67,7 @@
       (kill-buffer output-buffer)
       (delete-file formatted-temp-file))))
 
+
 (define-minor-mode gofmt-tag-mode
   "Minor mode for aligning struct fields using formattag."
   :lighter "Gofmt-Tag is enabled."
@@ -78,3 +79,5 @@
 ;; (add-hook 'go-mode-hook 'gofmt-tag-mode)
 
 (provide 'gofmt-tag)
+
+;;; gofmt-tag.el ends here
