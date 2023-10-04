@@ -43,18 +43,18 @@
          (formatted-temp-file (make-temp-file "formatted-"))
          (output-buffer (generate-new-buffer "*gofmt-tag-output*"))
          (file (buffer-file-name))
+         (current-md5sum (secure-hash 'md5 (current-buffer)))
          (old-point (point)))
     (when file
       (write-region (point-min) (point-max) temp-file)
       (call-process gofmt-tag-executable nil output-buffer nil "-file" temp-file "-C")
       (with-current-buffer output-buffer
-        (let* ((formatted-content (buffer-string))
-               (current-md5sum (shell-command-to-string (concat "md5sum " temp-file " | awk '{ print $1 }'"))))
+        (let ((formatted-content (buffer-string)))
           (with-temp-file formatted-temp-file
             (insert formatted-content)
             (when (string-match "\n$" formatted-content)
               (delete-char -1)))
-          (let* ((formatted-md5sum (shell-command-to-string (concat "md5sum " formatted-temp-file " | awk '{ print $1 }'"))))
+          (let* ((formatted-md5sum (secure-hash 'md5 (find-file-noselect formatted-temp-file))))
             (if (string= current-md5sum formatted-md5sum)
                 (message "Buffer is already formatted.")
               (message (format "Buffer is being formated? %s %s " current-md5sum formatted-md5sum))
