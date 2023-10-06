@@ -5,7 +5,7 @@
 ;; Maintainer: TEC <root@ybenel.cf>
 ;; Homepage: https://github.com/m1ndo/gofmt-tag
 ;; Version: 1.0.0
-;; Keywords: format, align, structural, structures
+;; Keywords: tools, wp, matching
 ;; Package-Requires: ((emacs "27"))
 
 ;; This file is not part of GNU Emacs.
@@ -29,6 +29,7 @@
 ;; Requires `formattag' in order to work,
 
 ;;; Code:
+(require 'cl-lib)
 
 (defvar gofmt-tag-executable "formattag"
   "The path to the formattag executable.")
@@ -57,7 +58,6 @@
           (let* ((formatted-md5sum (secure-hash 'md5 (find-file-noselect formatted-temp-file))))
             (if (string= current-md5sum formatted-md5sum)
                 (message "Buffer is already formatted.")
-              (message (format "Buffer is being formated? %s %s " current-md5sum formatted-md5sum))
               (progn
                 (with-current-buffer (find-file-noselect file)
                   (erase-buffer)
@@ -72,7 +72,7 @@
   "Minor mode for aligning struct fields using formattag."
   :lighter "Gofmt-Tag is enabled."
   :keymap (let ((map (make-sparse-keymap)))
-            (define-key map (kbd "C-c t") 'gofmt-tag)
+            (define-key map (kbd "C-c C-t") 'gofmt-tag)
             map))
 
 ;; Add it to go-mode hook
