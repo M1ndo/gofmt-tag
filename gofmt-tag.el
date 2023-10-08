@@ -2,7 +2,7 @@
 
 ;; Written by ybenel (m1ndo) - 2023
 ;; Author: ybenel <http://github/m1ndo>
-;; Maintainer: TEC <root@ybenel.cf>
+;; Maintainer: ybenel <root@ybenel.cf>
 ;; Homepage: https://github.com/m1ndo/gofmt-tag
 ;; Version: 1.0.0
 ;; Keywords: tools, wp, matching
@@ -27,6 +27,7 @@
 
 ;; A package for formatting struct tags in golang (go-mode)
 ;; Requires `formattag' in order to work,
+;; Add it to go-mode hook with `(add-hook 'go-mode-hook 'gofmt-tag-mode)`
 
 ;;; Code:
 (require 'cl-lib)
@@ -70,13 +71,10 @@
 
 (define-minor-mode gofmt-tag-mode
   "Minor mode for aligning struct fields using formattag."
-  :lighter "Gofmt-Tag is enabled."
+  :lighter " GoFmt-Tag"
   :keymap (let ((map (make-sparse-keymap)))
             (define-key map (kbd "C-c C-t") 'gofmt-tag)
             map))
-
-;; Add it to go-mode hook
-;; (add-hook 'go-mode-hook 'gofmt-tag-mode)
 
 (provide 'gofmt-tag)
 
