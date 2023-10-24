@@ -4,7 +4,7 @@
 ;; Author: ybenel <http://github/m1ndo>
 ;; Maintainer: ybenel <root@ybenel.cf>
 ;; Homepage: https://github.com/m1ndo/gofmt-tag
-;; Version: 1.0.0
+;; Version: 1.0.1
 ;; Keywords: tools, wp, matching
 ;; Package-Requires: ((emacs "27"))
 
@@ -66,7 +66,8 @@
                   (goto-char old-point))
                 (message "Formatted with formattag."))))))
       (kill-buffer output-buffer)
-      (delete-file formatted-temp-file))))
+      (delete-file formatted-temp-file)
+      (kill-buffer formatted-temp-file))))
 
 
 (define-minor-mode gofmt-tag-mode
