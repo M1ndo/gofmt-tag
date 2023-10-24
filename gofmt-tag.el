@@ -66,7 +66,8 @@
                   (goto-char old-point))
                 (message "Formatted with formattag."))))))
       (kill-buffer output-buffer)
-      (delete-file formatted-temp-file))))
+      (delete-file formatted-temp-file)
+      (kill-buffer formatted-temp-file))))
 
 
 (define-minor-mode gofmt-tag-mode
