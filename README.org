@@ -1,4 +1,6 @@
 #+title: Gofmt-Tag
+#+HTML: <a href="https://melpa.org/#/gofmt-tag"><img alt="MELPA" src="https://melpa.org/packages/gofmt-tag-badge.svg"/></a>
+#+HTML: <a href="https://stable.melpa.org/#/gofmt-tag"><img alt="MELPA Stable" src="https://stable.melpa.org/packages/gofmt-tag-badge.svg"/></a>
 #+html: <p><img src="https://img.shields.io/badge/Emacs-27.1+-blueviolet.svg?style=flat-square&logo=GNU%20Emacs&logoColor=white">
 #+html: <img src="https://img.shields.io/badge/-Linux-fcc624?logo=linux&style=flat-square&logoColor=black">
 #+html: <img src="https://img.shields.io/badge/-MacOS-lightgrey?logo=apple&style=flat-square&logoColor=black">
