@@ -1,10 +1,10 @@
-;;; gofmt-tag.el --- Format and align go struct tags -*- lexical-binding: t -*-
+;;; gofmt-tag.el --- Format and align go struct tags -*- lexical-binding: nil -*-
 
-;; Written by ybenel (m1ndo) - 2023
+;; Written by ybenel (m1ndo) - 2024
 ;; Author: ybenel <http://github/m1ndo>
 ;; Maintainer: ybenel <root@ybenel.cf>
 ;; Homepage: https://github.com/m1ndo/gofmt-tag
-;; Version: 1.0.1
+;; Version: 1.0.2
 ;; Keywords: tools, wp, matching
 ;; Package-Requires: ((emacs "27"))
 
@@ -41,7 +41,7 @@
   (unless (executable-find gofmt-tag-executable)
     (message "formattag executable not found.")
     (cl-return))
-  (let* ((temp-file (make-temp-file "gofmttag"))
+  (let* ((temp-file (make-temp-file "gofmttag-"))
          (formatted-temp-file (make-temp-file "formatted-"))
          (output-buffer (generate-new-buffer "*gofmt-tag-output*"))
          (file (buffer-file-name))
@@ -64,11 +64,14 @@
                   (erase-buffer)
                   (insert-file-contents formatted-temp-file)
                   (goto-char old-point))
-                (message "Formatted with formattag."))))))
-      (kill-buffer output-buffer)
-      (delete-file formatted-temp-file)
-      (kill-buffer formatted-temp-file))))
-
+                (message "Formatted with formattag.")))))))
+    (dolist (file (list formatted-temp-file temp-file)
+                  (when (file-exists-p file)
+                    (delete-file file))))
+    (kill-buffer output-buffer)
+    (let ((formatted-buffer (find-buffer-visiting formatted-temp-file)))
+      (when formatted-buffer
+        (kill-buffer formatted-buffer)))))
 
 (define-minor-mode gofmt-tag-mode
   "Minor mode for aligning struct fields using formattag."
